@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.changhong.cloud.javarestsample.dao.UserDao">
+    <sql id="All_Column_Values">
+        id,
+        name,
+        age,
+        status
+    </sql>
+
+    <select id="listUser" resultType="com.changhong.cloud.javarestsample.pojo.User">
+        select id,name,age,status from user
+    </select>
+
+    <select id="getUserById" parameterType="Integer" resultType="com.changhong.cloud.javarestsample.pojo.User">
+        SELECT
+        <include refid="All_Column_Values"/>
+        FROM
+        user
+        WHERE
+        id = #{id}
+    </select>
+
+    <insert id="add" parameterType="com.changhong.cloud.javarestsample.pojo.User">
+        INSERT INTO user(name,age,status) VALUES(#{name},#{age},#{status});
+    </insert>
+    <!--
+    <select id="findByName" parameterType="String" resultType="com.changhong.cloud.javarestsample.pojo.User">
+        SELECT
+        <include refid="All_Column_Values"/>
+        FROM
+        user
+        WHERE
+        name = #{name}
+    </select>
+
+    <update id="update" parameterType="com.changhong.cloud.javarestsample.pojo.User" statementType="PREPARED">
+        UPDATE user
+        <set>
+            <if test="id != null">id= #{id},</if>
+            <if test="name != null">name = #{name},</if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>-->
+</mapper>
