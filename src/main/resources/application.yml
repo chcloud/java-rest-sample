@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://172.17.123.134:3306/springbootdb?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+        username: root
+        password: chbigdata
+        driver-class-name: com.mysql.jdbc.Driver
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+
+mybatis:
+  mapper-locations: classpath*:mybatis/*.xml
+  type-aliases-package: com.changhong.cloud.javarestsmaple.dao
+
+#pagehelper
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
